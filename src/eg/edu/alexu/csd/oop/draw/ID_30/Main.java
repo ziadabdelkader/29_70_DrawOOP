@@ -18,7 +18,8 @@ import java.lang.Math;
 
 public class Main {
 	
-    public static void main(String args[]){
+	static String clicked = "";
+	public static void main(String args[]){
         
     	JFrame newFrame = new JFrame();
         int newFrameWidth = 200;
@@ -47,6 +48,7 @@ public class Main {
         	public void mouseClicked(MouseEvent e1) {
         		panel.addMouseListener(new MouseAdapter() {
         			public void mouseClicked(MouseEvent el) {
+        	    		clicked = "LINE";
         				if(firstClick) {
 	        				x1 = el.getX();
 	                		y1 = el.getY();
@@ -55,9 +57,11 @@ public class Main {
         					x2 = el.getX();
 	                		y2 = el.getY();
 	                		panel.removeMouseListener(this);
-	                		line newShape = new line(x1, y1, x2, y2);
-	                		newShape.draw(panel.getGraphics());
-	                		firstClick = true;
+	                		if(clicked == "LINE") {
+		                		line newShape = new line(x1, y1, x2, y2);
+		                		newShape.draw(panel.getGraphics());
+		                		firstClick = true;
+	                		}
         				}
                 	}
                 });
@@ -72,10 +76,11 @@ public class Main {
         
         JButton btnSquare = new JButton("SQUARE");
         btnSquare.addMouseListener(new MouseAdapter() {
-        	int x1, y1, x2;
+        	int x1, y1, x2, y2;
     		boolean firstClick = true;
         	@Override
         	public void mouseClicked(MouseEvent e2) {
+        		clicked = "SQUARE";
         		panel.addMouseListener(new MouseAdapter() {
         			public void mouseClicked(MouseEvent es) {
         				if(firstClick) {
@@ -84,10 +89,12 @@ public class Main {
 	                		firstClick = false;
         				}else {
         					x2 = es.getX();
-	                		es.getY();
+	                		y2 = es.getY();
 	                		panel.removeMouseListener(this);
-	                		square newShape = new square(x1 , y1, x2 - x1);
-	                		newShape.draw(panel.getGraphics());
+	                		if(clicked == "SQUARE") {
+		                		square newShape = new square(x1 , y1, Math.max(Math.abs(x2 - x1), Math.abs(y2 - y1)));
+		                		newShape.draw(panel.getGraphics());
+	                		}
 	                		firstClick = true;
         				}
                 	}
@@ -104,6 +111,7 @@ public class Main {
     		boolean firstClick = true;
         	@Override
         	public void mouseClicked(MouseEvent e3) {
+        		clicked = "RECTANGLE";
         		panel.addMouseListener(new MouseAdapter() {
         			public void mouseClicked(MouseEvent er) {
         				if(firstClick) {
@@ -114,8 +122,10 @@ public class Main {
         					x2 = er.getX();
 	                		y2 = er.getY();
 	                		panel.removeMouseListener(this);
-	                		rectangle newShape = new rectangle(x1 , y1, x2 - x1, y2 - y1);
-	                		newShape.draw(panel.getGraphics());
+	                		if(clicked == "RECTANGLE") {
+		                		rectangle newShape = new rectangle(x1 , y1, x2 - x1, y2 - y1);
+		                		newShape.draw(panel.getGraphics());
+	                		}
 	                		firstClick = true;
         				}
                 	}
@@ -132,6 +142,7 @@ public class Main {
     		String Click = "first";
         	@Override
         	public void mouseClicked(MouseEvent e4) {
+        		clicked = "TRIANGLE";
         		panel.addMouseListener(new MouseAdapter() {
         			public void mouseClicked(MouseEvent et) {
         				if(Click == "first") {
@@ -145,8 +156,10 @@ public class Main {
         				}else {
         					x3 = et.getX();
 	                		y3 = et.getY();
-	                		triangle newShape = new triangle(x1 , y1, x2, y2, x3, y3);
-	                		newShape.draw(panel.getGraphics());
+	                		if(clicked == "TRIANGLE") {
+		                		triangle newShape = new triangle(x1 , y1, x2, y2, x3, y3);
+		                		newShape.draw(panel.getGraphics());
+        				}
 	                		Click = "first";
 	                		panel.removeMouseListener(this);
         				}
@@ -164,6 +177,7 @@ public class Main {
     		boolean firstClick = true;
         	@Override
         	public void mouseClicked(MouseEvent e5) {
+        		clicked = "CIRCLE";
         		panel.addMouseListener(new MouseAdapter() {
         			public void mouseClicked(MouseEvent ec) {
         				if(firstClick) {
@@ -174,8 +188,10 @@ public class Main {
         					x2 = ec.getX();
 	                		y2 = ec.getY();
 	                		panel.removeMouseListener(this);
-	                		circle newShape = new circle(x1 , y1, Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2)));
-	                		newShape.draw(panel.getGraphics());
+		                		if(clicked == "CIRCLE") {
+		                		circle newShape = new circle(x1 , y1, Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2)));
+		                		newShape.draw(panel.getGraphics());
+		                	}
 	                		firstClick = true;
         				}
                 	}
@@ -188,10 +204,11 @@ public class Main {
         
         JButton btnEllipse = new JButton("ELLIPSE");
         btnEllipse.addMouseListener(new MouseAdapter() {
-        	int x1, y1, x2, y2, x3, y3;
+        	int x1, y1, x2, y3;
     		String Click = "first";
         	@Override
         	public void mouseClicked(MouseEvent e6) {
+        		clicked = "ELLIPSE";
         		panel.addMouseListener(new MouseAdapter() {
         			public void mouseClicked(MouseEvent ee) {
         				if(Click == "first") {
@@ -200,13 +217,15 @@ public class Main {
 	                		Click = "second";
         				}else if (Click == "second") {
         					x2 = ee.getX();
-	                		y2 = ee.getY();
+	                		ee.getY();
 	                		Click = "third";
         				}else {
-        					x3 = ee.getX();
+        					ee.getX();
 	                		y3 = ee.getY();
-	                		ellipse newShape = new ellipse(x2, y3, 2 * Math.abs(x1 - x2), 2 * Math.abs(y1 - y3));
-	                		newShape.draw(panel.getGraphics());
+	                		if(clicked == "ELLIPSE") {
+		                		ellipse newShape = new ellipse(x1 - Math.abs(x1 - x2), y1 - Math.abs(y1 - y3), 2 * Math.abs(x1 - x2), 2 * Math.abs(y1 - y3));
+		                		newShape.draw(panel.getGraphics());
+	                		}
 	                		Click = "first";
 	                		panel.removeMouseListener(this);
         				}
