@@ -44,19 +44,8 @@ public class circle extends ShapeImp{
 
     @Override
     public Shape resize(int x, int y) {
-        Shape update=null;
-        try {
-            update=(Shape) this.clone();
-        } catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
+
         Point start=this.getPosition();
-        update.setProperties( new HashMap<String, Double>()
-        {
-            {
-                put("radius",Math.sqrt(Math.pow(start.x-x,2)+Math.pow(start.y-y,2)));
-            }
-        });
-        return update;
+        return new circle(start.x,start.y,Math.sqrt(Math.pow(start.x-x,2)+Math.pow(start.y-y,2)));
     }
 }

@@ -95,6 +95,7 @@ public class SmokeTest {
         for(Class<? extends Shape> shapeClass : supportedShapes){
             if (!shapeClass.getName().contains("Dummy"))
                 try {
+                    System.out.println(shapeClass);
                     Shape shape = shapeClass.newInstance();
                     assertNotNull("Failed to create shape", shape);
                     if (shape.getProperties() == null || shape.getProperties().size() == 0)

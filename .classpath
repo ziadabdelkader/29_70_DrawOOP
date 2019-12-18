@@ -2,8 +2,12 @@
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="hamcrest-core-1.3.jar"/>
+	<classpathentry kind="lib" path="jar.exe.jar"/>
+	<classpathentry kind="lib" path="junit-4.13-beta-3.jar"/>
 	<classpathentry kind="lib" path="miglayout15-swing.jar"/>
+	<classpathentry kind="lib" path="out/artifacts/Active5_jar/Active5.jar"/>
 	<classpathentry kind="lib" path="RoundRectangle.jar"/>
 	<classpathentry kind="lib" path="test_supporting_files.jar"/>
-	<classpathentry kind="output" path="bin"/>
+	<classpathentry kind="output" path="out/production/Active5"/>
 </classpath>

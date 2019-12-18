@@ -19,20 +19,8 @@ public class square extends rectangle{
 		Point start=this.getPosition();
 		if(x<start.x || y<start.y)
 			return this;
-		Shape update=null;
-		try {
-			update=(Shape)this.clone();
-		} catch (CloneNotSupportedException e) {
-			e.printStackTrace();
-		}
 		double len=Math.max((x-start.x),(y-start.y));
-		update.setProperties(new HashMap<String, Double>()
-		{
-			{
-				put("width", len );
-				put("height",len);
-			}
-		});
-		return update;
+
+		return new square(start.x,start.y,len);
 	}
 }

@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="29_70_drawoop">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/jar.exe.jar!/" />
+      <root url="jar://$PROJECT_DIR$/miglayout15-swing.jar!/" />
+      <root url="jar://$PROJECT_DIR$/hamcrest-core-1.3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/test_supporting_files.jar!/" />
+      <root url="jar://$PROJECT_DIR$/junit-4.13-beta-3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/RoundRectangle.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

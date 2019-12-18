@@ -4,7 +4,7 @@ import eg.edu.alexu.csd.oop.draw.DrawingEngine;
 import eg.edu.alexu.csd.oop.draw.ID_30.basicShapes.*;
 import eg.edu.alexu.csd.oop.draw.RoundRectangle;
 import eg.edu.alexu.csd.oop.draw.Shape;
-import sun.font.CreatedFontTracker;
+//import sun.font.CreatedFontTracker;
 
 import java.awt.*;
 import java.beans.XMLDecoder;
@@ -23,17 +23,7 @@ import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class DrawingEngineImp implements DrawingEngine {
-	
-	/*class saveObject{
-		saveObject(){
-			
-		}
-        ArrayList<Shape> nowShapes = new ArrayList<Shape>();
-        saveObject(ArrayList<Shape> nowShapes1){
-            nowShapes = nowShapes1;
-        }
-	}*/
-	
+
     private ArrayList<operation> history;
     private ArrayList<Shape> nowShapes;
     private int historyIndex;
@@ -45,7 +35,7 @@ public class DrawingEngineImp implements DrawingEngine {
     }
     @Override
     public void refresh(Graphics canvas) {
-        System.out.println("how many shapes ? " +nowShapes.size());
+        //System.out.println("how many shapes ? " +nowShapes.size());
         for(int i=0;i<nowShapes.size();i++){
             nowShapes.get(i).draw(canvas);
         }
@@ -55,7 +45,7 @@ public class DrawingEngineImp implements DrawingEngine {
     public void addShape(Shape shape) {
         nowShapes.add(shape);
         this.DeltHistory();
-            history.add(new operation(1,shape,null));
+        history.add(new operation(1,shape,null));
     }
 
     @Override
@@ -101,15 +91,15 @@ public class DrawingEngineImp implements DrawingEngine {
     @Override
     public void undo() {
         if(historyIndex == -1){
-            System.out.println("No undo to do");
+            //System.out.println("No undo to do");
             return;
         }
         operation req=history.get(historyIndex);
-        System.out.println("Inside undo with type "+req.getType());
+        //System.out.println("Inside undo with type "+req.getType());
         if(req.getType()==1){
-            System.out.println("size before undo = "+nowShapes.size() );
+            //System.out.println("size before undo = "+nowShapes.size() );
             nowShapes.remove(req.getS1());
-            System.out.println("shape removed "+req.getS1()+" nowShapes size = "+nowShapes.size());
+            //System.out.println("shape removed "+req.getS1()+" nowShapes size = "+nowShapes.size());
         }else if(req.getType()==2){
             nowShapes.add(req.getS1());
         }else{
@@ -122,7 +112,7 @@ public class DrawingEngineImp implements DrawingEngine {
     @Override
     public void redo() {
         if(!(historyIndex < history.size()-1)){
-            System.out.println("No redo to do history index = "+historyIndex+" history size = "+history.size());
+            //System.out.println("No redo to do history index = "+historyIndex+" history size = "+history.size());
             return;
         }
         historyIndex++;
@@ -139,52 +129,52 @@ public class DrawingEngineImp implements DrawingEngine {
 
     @Override
     public void save(String path) {
-    	
-    	if(path.contains(".json")) {
-    		
-    	}else {
-    		FileOutputStream fos = null;
-			try {
-				fos = new FileOutputStream(path);
-			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-    	    XMLEncoder encoder = new XMLEncoder(fos);
-    	    encoder.writeObject(nowShapes);
-    	    encoder.close();
-    	    try {
-				fos.close();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-    	}
+
+        if(path.contains(".json")) {
+
+        }else {
+            FileOutputStream fos = null;
+            try {
+                fos = new FileOutputStream(path);
+            } catch (FileNotFoundException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            XMLEncoder encoder = new XMLEncoder(fos);
+            encoder.writeObject(nowShapes);
+            encoder.close();
+            try {
+                fos.close();
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
     }
 
     @SuppressWarnings("unchecked")
-	@Override
+    @Override
     public void load(String path) {
-    			if(path.contains(".json")) {
-    		
-    	}else {
-    		InputStream fos = null;
-			try {
-				fos = new FileInputStream(path);
-			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-    	    XMLDecoder decoder = new XMLDecoder(fos);
-    	    nowShapes = (ArrayList<Shape>) decoder.readObject();
-    	    decoder.close();
-    	    try {
-				fos.close();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-    	}
+        if(path.contains(".json")) {
+
+        }else {
+            InputStream fos = null;
+            try {
+                fos = new FileInputStream(path);
+            } catch (FileNotFoundException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            XMLDecoder decoder = new XMLDecoder(fos);
+            nowShapes = (ArrayList<Shape>) decoder.readObject();
+            decoder.close();
+            try {
+                fos.close();
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
     }
     private void DeltHistory(){
         int siz=history.size();
@@ -206,7 +196,7 @@ public class DrawingEngineImp implements DrawingEngine {
         }
         return null;
     }
-        public RoundRectangle makeRR(int x,int y,double Width,double Length){
+    public RoundRectangle makeRR(int x,int y,double Width,double Length){
         RoundRectangle neo=new RoundRectangle();
         neo.setPosition(new Point(x,y));
         neo.setProperties(new HashMap<String, Double>()

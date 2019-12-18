@@ -4,6 +4,7 @@ import eg.edu.alexu.csd.oop.draw.Shape;
 import java.awt.*;
 import java.util.Map;
 
+
 abstract public class ShapeImp implements Shape,Cloneable {
     private Point startPoint;
     private Map<String, Double> shapeProperties;

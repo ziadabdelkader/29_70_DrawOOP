@@ -44,42 +44,17 @@ public class line extends ShapeImp{
 
 	@Override
 	public Shape resize(int x, int y) {
-		Shape update=null;
-		try {
-			update=(Shape) this.clone();
-		} catch (CloneNotSupportedException e) {
-			e.printStackTrace();
-		}
-		update.setProperties(new HashMap<String, Double>()
-		{
-			{
-				put("x2",(double)x);
-				put("y2",(double)y);
-			}
-		});
-		return update;
+		Point start=this.getPosition();
+		return new line(start.x,start.y,x,y);
 	}
 
 	@Override
 	public Shape move(int x1, int y1, int x2, int y2) {
-		Shape update=null;
-		try {
-			update=(Shape) this.clone();
-		} catch (CloneNotSupportedException e) {
-			e.printStackTrace();
-		}
 		Point start=this.getPosition();
 		HashMap<String,Double> t= (HashMap<String, Double>) this.getProperties();
 		int Ox2=t.get("x2").intValue();
 		int Oy2=t.get("y2").intValue();
-		update.setPosition(new Point(start.x+(x2-x1),start.y+(y2-y1)));
-		update.setProperties(new HashMap<String, Double>()
-		{
-			{
-				put("x2",(double)Ox2+(x2-x1));
-				put("y2",(double)Oy2+(y2-y1));
-			}
-		});
-		return update;
+
+		return new line(start.x+(x2-x1),start.y+(y2-y1),Ox2+(x2-x1),Oy2+(y2-y1));
 	}
 }

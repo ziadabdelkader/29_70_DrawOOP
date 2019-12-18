@@ -61,12 +61,7 @@ public class triangle extends ShapeImp{
     @Override
     public Shape resize(int x, int y) {
         double cons=Math.pow(10,-1);
-	    Shape update=null;
-        try {
-            update=(Shape) this.clone();
-        } catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
+
         Point start=this.getPosition();
         HashMap<String,Double> t= (HashMap<String, Double>) this.getProperties();
         int x2=t.get("x2").intValue();
@@ -78,56 +73,24 @@ public class triangle extends ShapeImp{
         double L3= Point2D.distance(x,y,x3,y3);
         double minL=Math.min(L1,Math.min(L2,L3));
         if(Math.abs(L1-minL)<cons){
-            update.setPosition(new Point(x,y));
+            return new triangle(x,y,x2,y2,x3,y3);
         }else if(Math.abs(L2-minL)<cons){
-            update.setProperties(new HashMap<String, Double>()
-            {
-                {
-                    put("x2",(double)x);
-                    put("y2",(double)y);
-                    put("x3",(double)x3);
-                    put("y3",(double)y3);
-                }
-            });
+            return new triangle(start.x,start.y,x,y,x3,y3);
         }else{
-            update.setProperties(new HashMap<String, Double>()
-            {
-                {
-                    put("x2",(double)x2);
-                    put("y2",(double)y2);
-                    put("x3",(double)x);
-                    put("y3",(double)y);
-                }
-            });
+
+            return new triangle(start.x,start.y,x2,y2,x,y);
         }
-        return update;
     }
 
     @Override
     public Shape move(int x1, int y1, int x2, int y2) {
-        Shape update=null;
-        try {
-            update=(Shape) this.clone();
-        } catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
         Point start=this.getPosition();
         HashMap<String,Double> t= (HashMap<String, Double>) this.getProperties();
         int Ox2=t.get("x2").intValue();
         int Oy2=t.get("y2").intValue();
         int Ox3=t.get("x3").intValue();
         int Oy3=t.get("y3").intValue();
-        update.setPosition(new Point(start.x+(x2-x1),start.y+(y2-y1)));
-        update.setProperties(new HashMap<String, Double>()
-        {
-            {
-                put("x2",(double)Ox2+(x2-x1));
-                put("y2",(double)Oy2+(y2-y1));
-                put("x3",(double)Ox3+(x2-x1));
-                put("y3",(double)Oy3+(y2-y1));
-            }
-        });
-        return update;
+        return new triangle(start.x+(x2-x1),start.y+(y2-y1),Ox2+(x2-x1),Oy2+(y2-y1),Ox3+(x2-x1),Oy3+(y2-y1));
     }
 
     private double area(int x1, int y1, int x2, int y2, int x3, int y3)

@@ -41,4 +41,12 @@ public class ellipse extends rectangle {
 			return true;
 		return false;
 	}
+	@Override
+	public Shape resize(int x, int y) {
+		Point start=this.getPosition();
+		if(x<start.x || y<start.y)
+			return this;
+
+		return new ellipse(start.x,start.y,(x-start.x),(y-start.y));
+	}
 }

@@ -52,20 +52,7 @@ public class rectangle extends ShapeImp {
         Point start=this.getPosition();
         if(x<start.x || y<start.y)
             return this;
-        Shape update=null;
-        try {
-            update=(Shape)this.clone();
-        } catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
 
-        update.setProperties(new HashMap<String, Double>()
-        {
-            {
-                put("width", (double) (x-start.x));
-                put("height",(double)(y-start.y));
-            }
-        });
-        return update;
+        return new rectangle(start.x,start.y,(x-start.x),(y-start.y));
     }
 }
